@@ -21,27 +21,42 @@ export default function Login() {
   };
 
   return (
-    <div style={{ maxWidth: 300, margin: "auto", marginTop: 60 }}>
-      <h2>Sign In</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="username"
-          style={{ width: "100%", marginBottom: 10 }}
-        />
-        <input
-          value={password}
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="password"
-          style={{ width: "100%", marginBottom: 10 }}
-        />
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit" style={{ width: "100%" }}>
-          Login
-        </button>
-      </form>
+    <div className="h-screen flex items-center justify-center">
+      <div className="flex flex-col gap-2">
+        <h2>Sign In</h2>
+        <form onSubmit={handleLogin} className="flex flex-col gap-2 w-80">
+          <input
+            name="username"
+            value={username}
+            onChange={(e) => {
+              if (error) setError("");
+
+              setUsername(e.target.value);
+            }}
+            placeholder="username"
+            className="border border-gray-300 rounded-md p-2"
+          />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => {
+              if (error) setError("");
+
+              setPassword(e.target.value);
+            }}
+            placeholder="password"
+            className="border border-gray-300 rounded-md p-2"
+          />
+          {error && <p className="text-red-500">{error}</p>}
+          <button
+            type="submit"
+            className="bg-blue-500 text-white rounded-md p-2"
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

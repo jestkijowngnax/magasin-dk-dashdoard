@@ -4,7 +4,7 @@ export default function Dashboard() {
   const { user, logout } = useAuth();
 
   return (
-    <div style={{ padding: 20 }}>
+    <div>
       <h1>Welcome, {user?.firstName}</h1>
       {/* <img src={user?.image} width={80} /> */}
       <p>Email: {user?.email}</p>
