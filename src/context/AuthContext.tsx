@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useEffect,
-  useState,
-  type PropsWithChildren,
-} from "react";
+import { createContext, useState, type PropsWithChildren } from "react";
 import { useLogin, type LoginPayload } from "@/api/auth";
 import type { User } from "@/entities/user";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +25,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     onSuccess: (data) => {
       setUser(data);
       localStorage.setItem("user", JSON.stringify(data));
+      navigate("/products");
     },
     onError: () => {
       setError("Invalid username or password");
@@ -40,12 +36,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setUser(null);
     localStorage.removeItem("user");
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate("/products");
-    }
-  }, [navigate, user]);
 
   return (
     <AuthContext.Provider value={{ user, login, logout, error }}>

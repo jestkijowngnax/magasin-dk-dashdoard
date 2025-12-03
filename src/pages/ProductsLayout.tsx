@@ -1,13 +1,17 @@
-import { useEffect } from "react";
-import apiClient from "@/api/apiClient";
+import { useProducts } from "@/api/products";
 
 export const ProductsLayout = () => {
-  useEffect(() => {
-    // Using the new API client with automatic token injection
-    apiClient
-      .get("/products")
-      .then((response) => console.log(response.data))
-      .catch((error) => console.error("Failed to fetch products:", error));
-  }, []);
-  return <div>ProductsLayout</div>;
+  const { data } = useProducts();
+
+  return (
+    <div>
+      <h1>Products</h1>
+      {data?.products.map((product) => (
+        <div key={product.id}>
+          <h2>{product.title}</h2>
+          <p>{product.price}</p>
+        </div>
+      ))}
+    </div>
+  );
 };
