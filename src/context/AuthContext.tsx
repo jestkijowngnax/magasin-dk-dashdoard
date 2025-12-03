@@ -1,4 +1,9 @@
-import { createContext, useState, type PropsWithChildren } from "react";
+import {
+  createContext,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from "react";
 import { useLogin, type LoginPayload } from "@/api/auth";
 import type { LoginUser } from "@/entities/login-user";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +41,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setUser(null);
     localStorage.removeItem("user");
   };
+
+  useEffect(() => {
+    if (user && window.location.pathname === "/login") {
+      navigate("/products");
+    }
+  }, [navigate, user]);
 
   return (
     <AuthContext.Provider value={{ user, login, logout, error }}>
