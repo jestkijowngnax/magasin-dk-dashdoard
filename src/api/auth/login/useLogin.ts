@@ -1,13 +1,13 @@
 import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
 import { login } from "./login";
 import type { LoginPayload } from "./schema";
-import type { User } from "@/entities/user";
+import type { LoginUser } from "@/entities/login-user";
 import type { AxiosError } from "axios";
 
 export const useLogin = (
-  options?: UseMutationOptions<User, AxiosError, LoginPayload>
+  options?: UseMutationOptions<LoginUser, AxiosError, LoginPayload>
 ) =>
-  useMutation<User, AxiosError, LoginPayload>({
+  useMutation<LoginUser, AxiosError, LoginPayload>({
     mutationFn: login,
     ...options,
   });

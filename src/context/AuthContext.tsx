@@ -1,10 +1,10 @@
 import { createContext, useState, type PropsWithChildren } from "react";
 import { useLogin, type LoginPayload } from "@/api/auth";
-import type { User } from "@/entities/user";
+import type { LoginUser } from "@/entities/login-user";
 import { useNavigate } from "react-router-dom";
 
 type AuthContextType = {
-  user: User | null;
+  user: LoginUser | null;
   error: string | null;
   login: (payload: LoginPayload) => void;
   logout: () => void;
@@ -14,7 +14,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(() => {
+  const [user, setUser] = useState<LoginUser | null>(() => {
     const stored = localStorage.getItem("user");
     return stored ? JSON.parse(stored) : null;
   });
