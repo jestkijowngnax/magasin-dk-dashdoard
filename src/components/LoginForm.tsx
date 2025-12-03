@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export const LoginForm = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(username, password);
-      navigate("/");
+      navigate("/products");
     } catch {
       setError("Invalid credentials");
     }
@@ -59,4 +59,4 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
