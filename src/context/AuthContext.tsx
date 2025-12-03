@@ -1,49 +1,54 @@
-import { createContext, useState, type ReactNode } from "react";
-
-type User = {
-  id: number;
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  token: string;
-};
+import {
+  createContext,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from "react";
+import { useLogin, type LoginPayload } from "@/api/auth";
+import type { User } from "@/entities/user";
+import { useNavigate } from "react-router-dom";
 
 type AuthContextType = {
   user: User | null;
-  login: (username: string, password: string) => Promise<void>;
+  error: string | null;
+  login: (payload: LoginPayload) => void;
   logout: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({ children }: PropsWithChildren) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(() => {
     const stored = localStorage.getItem("user");
     return stored ? JSON.parse(stored) : null;
   });
 
-  const login = async (username: string, password: string) => {
-    const res = await fetch("https://dummyjson.com/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
+  const [error, setError] = useState<string | null>(null);
 
-    if (!res.ok) throw new Error("Incorrect username or password");
-
-    const data = (await res.json()) as User;
-    setUser(data);
-    localStorage.setItem("user", JSON.stringify(data));
-  };
+  const { mutate: login } = useLogin({
+    onSuccess: (data) => {
+      setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
+    },
+    onError: () => {
+      setError("Invalid username or password");
+    },
+  });
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
   };
 
+  useEffect(() => {
+    if (user) {
+      navigate("/products");
+    }
+  }, [navigate, user]);
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, error }}>
       {children}
     </AuthContext.Provider>
   );

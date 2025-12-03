@@ -1,17 +1,8 @@
 import { LoginForm } from "@/components/LoginForm";
 import { useAuth } from "@/hooks/useAuth";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const LoginLayout = () => {
-  const { user } = useAuth();
-  const navigate = useNavigate();
+  const { login, error } = useAuth();
 
-  useEffect(() => {
-    if (user) {
-      navigate("/products");
-    }
-  }, [navigate, user]);
-
-  return <LoginForm />;
+  return <LoginForm onSubmit={login} error={error} />;
 };

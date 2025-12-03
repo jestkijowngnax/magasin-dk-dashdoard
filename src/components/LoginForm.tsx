@@ -1,36 +1,31 @@
-import { useAuth } from "@/hooks/useAuth";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import type { LoginPayload } from "@/api/auth";
 
-export const LoginForm = () => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
+import { useState } from "react";
 
+interface LoginFormProps {
+  error: string | null;
+  onSubmit: (payload: LoginPayload) => void;
+}
+
+export const LoginForm = ({ error, onSubmit }: LoginFormProps) => {
   const [username, setUsername] = useState("emilys");
   const [password, setPassword] = useState("emilyspass");
-  const [error, setError] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await login(username, password);
-      navigate("/products");
-    } catch {
-      setError("Invalid credentials");
-    }
+
+    onSubmit({ username, password });
   };
 
   return (
     <div className="h-screen flex items-center justify-center">
       <div className="flex flex-col gap-2">
         <h2>Sign In</h2>
-        <form onSubmit={handleLogin} className="flex flex-col gap-2 w-80">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-80">
           <input
             name="username"
             value={username}
             onChange={(e) => {
-              if (error) setError("");
-
               setUsername(e.target.value);
             }}
             placeholder="username"
@@ -41,8 +36,6 @@ export const LoginForm = () => {
             name="password"
             value={password}
             onChange={(e) => {
-              if (error) setError("");
-
               setPassword(e.target.value);
             }}
             placeholder="password"
