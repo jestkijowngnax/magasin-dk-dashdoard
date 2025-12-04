@@ -10,10 +10,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-white border-b sticky top-0 z-50">
-      <div className="container flex items-center justify-between py-4">
+    <header className="bg-white border-b sticky top-0 z-50 px-4">
+      <div className="flex items-center justify-between py-4 w-full">
         {/* Logo */}
-        <Link to="/" className="text-xl font-semibold ml-4">
+        <Link to="/" className="text-xl font-semibold">
           Magasin test Dashboard
         </Link>
 
