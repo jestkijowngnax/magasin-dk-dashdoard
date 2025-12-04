@@ -51,29 +51,15 @@ export default function ProductCard({
         <p className="text-gray-500 text-xs mt-1">
           Goodie-pris gælder Goodie-medlemmer på en valgt dag
         </p>
-
-        <div className="flex justify-between items-center">
-          <div>
-            <div className="flex gap-2 mt-3">
-              {["S", "M", "L"].map((size) => (
-                <span key={size} className="text-xs border px-2 py-1 rounded">
-                  {size}
-                </span>
-              ))}
-              <span className="text-xs text-gray-500">+2</span>
-            </div>
-            <p className="text-gray-500 text-xs mt-2">Flere farver</p>
-          </div>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={onEdit}>
-              <Edit size={18} />
-            </Button>
-            <Button variant="outline" onClick={onDelete}>
-              <Trash size={18} />
-            </Button>
-          </div>
-        </div>
       </CardContent>
+      <div className="flex gap-2 justify-end mt-4">
+        <Button variant="outline" onClick={onEdit}>
+          <Edit size={18} />
+        </Button>
+        <Button variant="outline" onClick={onDelete}>
+          <Trash size={18} />
+        </Button>
+      </div>
     </Card>
   );
 }
