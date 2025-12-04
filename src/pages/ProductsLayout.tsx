@@ -1,40 +1,79 @@
-import { useProducts } from "@/api/products/get-products";
+import { useState } from "react";
+import { useProducts, type Product } from "@/api/products/get-products";
 import ProductCard from "@/components/ProductCard";
+
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogTitle,
   DialogHeader,
 } from "@/components/ui/dialog";
-import { useDialog } from "@/hooks/useDialog";
+import ProductForm from "@/components/ProductForm";
+import { Button } from "@/components/ui/button";
 
 export const ProductsLayout = () => {
   const { data } = useProducts();
-  const { isOpen, open, close } = useDialog();
+  const [{ isOpen, initialState }, setAddEditProductDialogState] = useState<{
+    isOpen: boolean;
+    initialState: Product | null;
+  }>({
+    isOpen: false,
+    initialState: null,
+  });
+
+  const handleAddProduct = () => {
+    setAddEditProductDialogState({
+      isOpen: true,
+      initialState: null,
+    });
+  };
+
+  const handleEditProduct = (product: Product) => {
+    setAddEditProductDialogState({
+      isOpen: true,
+      initialState: product,
+    });
+  };
+
+  const handleCancel = () => {
+    setAddEditProductDialogState({
+      isOpen: false,
+      initialState: null,
+    });
+  };
 
   return (
     <div className="container mx-auto py-10 px-4 md:px-0">
-      <h1 className="text-2xl font-bold mb-6">Products</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Products</h1>
+        <Button onClick={handleAddProduct}>Add Product</Button>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {data?.products.map((product) => (
           <ProductCard
             key={product.id}
             product={product}
-            onEdit={open}
+            onEdit={() => {
+              handleEditProduct(product);
+            }}
             onDelete={() => {}}
           />
         ))}
       </div>
 
-      <Dialog open={isOpen} onOpenChange={close}>
+      <Dialog open={isOpen} onOpenChange={handleCancel}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Edit Product</DialogTitle>
-
-            <DialogDescription>Edit the product details.</DialogDescription>
           </DialogHeader>
+          <ProductForm
+            product={initialState}
+            onSubmit={(data) => {
+              console.log(data);
+            }}
+            onCancel={handleCancel}
+          />
         </DialogContent>
       </Dialog>
     </div>
