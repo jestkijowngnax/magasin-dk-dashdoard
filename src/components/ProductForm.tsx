@@ -2,15 +2,18 @@ import type { FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import type { Product } from "@/api/products/get-products";
 import type { AddEditProductPayload } from "@/api/products/schemas/addEditProductPayload";
+import { Spinner } from "./ui/spinner";
 
 interface ProductFormProps {
   product?: Product | null;
+  loading?: boolean;
   onSubmit: (formData: AddEditProductPayload) => void;
   onCancel: () => void;
 }
 
 export default function ProductForm({
   product,
+  loading = false,
   onSubmit,
   onCancel,
 }: ProductFormProps) {
@@ -159,10 +162,17 @@ export default function ProductForm({
       </div>
 
       <div className="flex gap-3 justify-end pt-4">
-        <Button type="button" variant="outline" onClick={onCancel}>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={onCancel}
+          disabled={loading}
+        >
           Cancel
         </Button>
-        <Button type="submit">{product ? "Update" : "Add"} Product</Button>
+        <Button type="submit" disabled={loading}>
+          {loading && <Spinner />} {product ? "Update" : "Add"} Product
+        </Button>
       </div>
     </form>
   );

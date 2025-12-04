@@ -5,9 +5,9 @@ import { editProduct } from "./editProduct";
 
 export const useEditProduct = (
   options?: UseMutationOptions<
-    { id: number },
+    AddEditProductPayload,
     AxiosError,
-    { id: number; product: Partial<AddEditProductPayload> }
+    { id: number; product: AddEditProductPayload }
   >
 ) => {
   return useMutation({

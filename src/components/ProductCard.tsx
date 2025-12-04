@@ -29,7 +29,7 @@ export default function ProductCard({
         </div>
         <img
           src={product.thumbnail}
-          className="w-full h-72 object-cover rounded-lg"
+          className="w-full h-72 rounded-lg object-contain"
         />
 
         <Button variant="outline">

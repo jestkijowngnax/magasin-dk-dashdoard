@@ -1,12 +1,12 @@
 import apiClient from "@/api/apiClient";
 
-export const deleteProduct = async ({ id }: { id: number }) => {
+export const deleteUser = async (id: number) => {
   const response = await apiClient.delete<{
     id: number;
     title: string;
     isDeleted: boolean;
     deletedOn: string;
-  }>(`/products/${id}`);
+  }>(`/users/${id}`);
 
   return response.data;
 };

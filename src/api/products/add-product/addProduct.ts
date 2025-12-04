@@ -5,9 +5,10 @@ import {
 } from "../schemas/addEditProductPayload";
 
 export const addProduct = async (product: AddEditProductPayload) => {
-  const response = await apiClient.post("/products/add", {
-    data: addEditProductPayloadSchema.parse(product),
-  });
+  const response = await apiClient.post<AddEditProductPayload>(
+    "/products/add",
+    addEditProductPayloadSchema.parse(product)
+  );
 
   return response.data;
 };

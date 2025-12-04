@@ -6,18 +6,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import type { User } from "@/api/users";
+import type { User } from "@/api/users/get-users";
 
 import { MoreVertical } from "lucide-react";
 
 export default function UserCard({
   user,
   onEdit,
-  onRemove,
+  onDelete,
 }: {
   user: User;
-  onEdit: (u: User) => void;
-  onRemove: (u: User) => void;
+  onEdit: () => void;
+  onDelete: () => void;
 }) {
   return (
     <Card className="p-4">
@@ -35,6 +35,7 @@ export default function UserCard({
               {user.firstName} {user.lastName}
             </p>
             <p className="text-sm text-gray-500">{user.email}</p>
+            <p className="text-sm text-gray-500">Age: {user.age}</p>
           </div>
         </div>
 
@@ -45,13 +46,8 @@ export default function UserCard({
           </DropdownMenuTrigger>
 
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => onEdit(user)}>
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => onRemove(user)}
-              className="text-red-600"
-            >
+            <DropdownMenuItem onClick={onEdit}>Edit</DropdownMenuItem>
+            <DropdownMenuItem onClick={onDelete} className="text-red-600">
               Remove
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -9,9 +9,10 @@ export const editProduct = async (
   id: number,
   product: Partial<AddEditProductPayload>
 ) => {
-  const response = await apiClient.put(`/products/${id}`, {
-    data: JSON.stringify(addEditProductPayloadSchema.parse(product)),
-  });
+  const response = await apiClient.put<AddEditProductPayload>(
+    `/products/${id}`,
+    addEditProductPayloadSchema.parse(product)
+  );
 
   return response.data;
 };

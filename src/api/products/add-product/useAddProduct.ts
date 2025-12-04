@@ -5,7 +5,7 @@ import type { AddEditProductPayload } from "../schemas/addEditProductPayload";
 
 export const useAddProduct = (
   options?: UseMutationOptions<
-    { id: number },
+    AddEditProductPayload,
     AxiosError,
     AddEditProductPayload
   >

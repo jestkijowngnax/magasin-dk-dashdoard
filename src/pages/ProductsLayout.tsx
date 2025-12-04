@@ -47,7 +47,7 @@ export const ProductsLayout = () => {
     });
   };
 
-  const { mutate: addProduct } = useAddProduct({
+  const { mutate: addProduct, isPending: isLoadingAddProduct } = useAddProduct({
     onSuccess: () => {
       toast.success("Product added successfully");
       handleCancel();
@@ -57,15 +57,16 @@ export const ProductsLayout = () => {
     },
   });
 
-  const { mutate: editProduct } = useEditProduct({
-    onSuccess: () => {
-      toast.success("Product edited successfully");
-      handleCancel();
-    },
-    onError: (error) => {
-      console.error("Error editing product:", error);
-    },
-  });
+  const { mutate: editProduct, isPending: isLoadingEditProduct } =
+    useEditProduct({
+      onSuccess: () => {
+        toast.success("Product edited successfully");
+        handleCancel();
+      },
+      onError: (error) => {
+        console.error("Error editing product:", error);
+      },
+    });
 
   const { mutate: deleteProduct } = useDeleteProduct({
     onSuccess: () => {
@@ -111,6 +112,7 @@ export const ProductsLayout = () => {
           </DialogHeader>
           <ProductForm
             product={initialState}
+            loading={isLoadingAddProduct || isLoadingEditProduct}
             onSubmit={(data) => {
               if (!initialState) {
                 addProduct(data);
