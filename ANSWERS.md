@@ -21,7 +21,7 @@
 - **Class Variance Authority (CVA)** - Utility for creating component variants
 - **Tailwind Merge** - Utility for merging Tailwind CSS classes
 - **Custom Fonts**:
-  - **BerlingNovaDisplayPro** - Specifically for Product cards
+  - **Playfair Display** (Google Fonts) - Elegant serif font similar to BerlingNovaDisplayPro, used across the application for a sophisticated, magazine-like aesthetic
 
 ### **State Management and Data Fetching**
 
@@ -128,9 +128,10 @@
 
 6. **Font Assets**:
 
-   - Add actual BerlingNovaDisplayPro font files to `/public/fonts/`
-   - Font loading optimization
-   - Font display swap for better performance
+   - ✅ Using Google Fonts (Playfair Display) for reliable font delivery
+   - ✅ Font preconnect for optimized loading
+   - ✅ Font display swap implemented for better performance
+   - Consider self-hosting fonts for better privacy and control
 
 7. **Data Validation**:
 

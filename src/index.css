@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-family-berling: "BerlingNovaDisplayPro", Georgia, Cambria,
+  --font-family-berling: "Playfair Display", Georgia, Cambria,
     "Times New Roman", Times, serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -117,13 +117,13 @@
   *::before,
   *::after {
     @apply border-border outline-ring/50;
-    font-family: "BerlingNovaDisplayPro", Georgia, Cambria, "Times New Roman",
+    font-family: "Playfair Display", Georgia, Cambria, "Times New Roman",
       Times, serif !important;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: "BerlingNovaDisplayPro", Georgia, Cambria, "Times New Roman",
+    font-family: "Playfair Display", Georgia, Cambria, "Times New Roman",
       Times, serif !important;
   }
 
@@ -141,7 +141,7 @@
   textarea,
   a,
   label {
-    font-family: "BerlingNovaDisplayPro", Georgia, Cambria, "Times New Roman",
+    font-family: "Playfair Display", Georgia, Cambria, "Times New Roman",
       Times, serif !important;
   }
 }
