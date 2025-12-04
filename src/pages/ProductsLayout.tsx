@@ -1,17 +1,18 @@
 import { useProducts } from "@/api/products";
+import ProductCard from "@/components/ProductCard";
 
 export const ProductsLayout = () => {
   const { data } = useProducts();
 
   return (
-    <div>
-      <h1>Products</h1>
-      {data?.products.map((product) => (
-        <div key={product.id}>
-          <h2>{product.title}</h2>
-          <p>{product.price}</p>
-        </div>
-      ))}
+    <div className="container mx-auto py-10">
+      <h1 className="text-2xl font-bold mb-6">Products</h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {data?.products.map((p) => (
+          <ProductCard key={p.id} product={p} />
+        ))}
+      </div>
     </div>
   );
 };
