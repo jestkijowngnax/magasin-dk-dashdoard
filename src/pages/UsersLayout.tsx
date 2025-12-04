@@ -78,7 +78,7 @@ export const UsersLayout = () => {
   return (
     <div className="container mx-auto py-10">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-semibold">Users</h1>
+        <h1 className="text-2xl">Users</h1>
         <Button
           onClick={() => {
             setAddEditUserDialogState({

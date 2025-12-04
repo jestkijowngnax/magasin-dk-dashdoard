@@ -29,8 +29,13 @@ export default function Navbar() {
             <>
               <Avatar className="h-8 w-8">
                 <AvatarImage src={user.image} />
-                <AvatarFallback>{user.firstName}</AvatarFallback>
+                <AvatarFallback>{user.firstName.charAt(0)}</AvatarFallback>
               </Avatar>
+              <div className="md:flex flex-col text-sm">
+                <p>{user.firstName}</p>
+                <p>{user.lastName}</p>
+              </div>
+
               <Button
                 className="cursor-pointer"
                 variant="outline"
@@ -53,11 +58,11 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden border-t bg-white">
           <nav className="flex flex-col p-4 gap-4">
-            <Link to="/" onClick={() => setOpen(false)}>
-              Home
+            <Link to="/products" onClick={() => setOpen(false)}>
+              Products
             </Link>
-            <Link to="/profile" onClick={() => setOpen(false)}>
-              Profile
+            <Link to="/users" onClick={() => setOpen(false)}>
+              Users
             </Link>
 
             {user ? (
