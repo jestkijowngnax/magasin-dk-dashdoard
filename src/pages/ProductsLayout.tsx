@@ -79,7 +79,6 @@ export const ProductsLayout = () => {
   });
 
   if (isLoading) {
-    console.log("here");
     return <Loader />;
   }
 
