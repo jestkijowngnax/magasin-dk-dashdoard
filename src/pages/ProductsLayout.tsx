@@ -14,8 +14,9 @@ import { useAddProduct } from "@/api/products";
 import { toast } from "sonner";
 import { useEditProduct } from "@/api/products/edit-product";
 import { useDeleteProduct } from "@/api/products/delete-product";
+import { Loader } from "@/components/Loader";
 export const ProductsLayout = () => {
-  const { data } = useProducts();
+  const { data, isLoading } = useProducts();
 
   const [{ isOpen, initialState }, setAddEditProductDialogState] = useState<{
     isOpen: boolean;
@@ -76,10 +77,15 @@ export const ProductsLayout = () => {
     },
   });
 
+  if (isLoading) {
+    console.log("here");
+    return <Loader />;
+  }
+
   return (
     <div className="container mx-auto py-10 px-4 md:px-0">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Products</h1>
+        <h1 className="text-2xl">Products</h1>
         <Button onClick={handleAddProduct}>Add Product</Button>
       </div>
 
@@ -99,7 +105,9 @@ export const ProductsLayout = () => {
       <Dialog open={isOpen} onOpenChange={handleCancel}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Edit Product</DialogTitle>
+            <DialogTitle>
+              {initialState ? "Edit Product" : "Add Product"}
+            </DialogTitle>
           </DialogHeader>
           <ProductForm
             product={initialState}

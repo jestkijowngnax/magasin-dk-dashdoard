@@ -44,7 +44,7 @@ export const LoginForm = ({ error, onSubmit }: LoginFormProps) => {
           {error && <p className="text-red-500">{error}</p>}
           <button
             type="submit"
-            className="bg-blue-500 text-white rounded-md p-2"
+            className="bg-[#507f70] text-white rounded-md p-2 cursor-pointer"
           >
             Login
           </button>

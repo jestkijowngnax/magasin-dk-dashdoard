@@ -39,7 +39,7 @@ export default function ProductCard({
 
       <CardContent className="pt-4">
         <p className="text-gray-600 text-sm">{product.brand}</p>
-        <h3 className="text-lg font-semibold mt-1">{product.title}</h3>
+        <h3 className="text-lg mt-1">{product.title}</h3>
         <div className="flex gap-2 items-center mt-2">
           <span className="text-green-700 font-bold">
             {discounted.toFixed(2)} kr.
