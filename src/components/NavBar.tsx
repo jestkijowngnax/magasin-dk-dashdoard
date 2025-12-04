@@ -12,9 +12,8 @@ export default function Navbar() {
   return (
     <header className="bg-white border-b sticky top-0 z-50 px-4">
       <div className="flex items-center justify-between py-4 w-full">
-        {/* Logo */}
         <Link to="/" className="text-xl font-semibold">
-          Magasin test Dashboard
+          Magasin Dashboard
         </Link>
 
         {/* Desktop Nav */}

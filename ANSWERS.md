@@ -185,3 +185,78 @@
     - Analytics integration
 
 This architecture provides a solid foundation with modern best practices, but requires the above improvements to be truly production-ready.
+
+---
+
+## Incomplete Features and Future Improvements
+
+### **Current Limitations (DummyJSON API)**
+
+The application currently uses **DummyJSON API** which has several limitations that impact the implementation:
+
+1. **Read-Only Data Operations**:
+
+   - No real database backend
+   - Cannot perform actual CRUD operations (Create, Update, Delete)
+   - API calls for edit/add/delete operations are simulated and don't persist
+
+2. **State Management Impact**:
+
+   - No need for optimistic updates or local state management for data mutations
+   - Lists don't require real-time re-rendering after operations
+   - No complex state synchronization between components
+   - API responses are handled with toast notifications rather than state updates
+
+3. **Missing CRUD Features**:
+   - User management (add/edit/delete users)
+   - Product management (add/edit/delete products)
+   - No file upload capabilities
+   - No data persistence
+
+### **Incomplete Implementation Areas**
+
+4. **Data Management Features**:
+
+   - Product filtering and search functionality
+   - User role management
+   - Bulk operations on data
+   - Data export capabilities
+
+5. **Advanced UI Components**:
+   - Data tables with sorting and pagination
+   - Form builders for complex forms
+   - Image upload and management
+   - Rich text editor for product descriptions
+
+### **Future Improvements for Real Backend**
+
+6. **When Migrating to Real API**:
+
+   - Implement optimistic updates for better UX
+   - Add local state management for complex data operations
+   - Real-time data synchronization
+   - Implement proper caching strategies
+   - Add conflict resolution for concurrent edits
+
+7. **Enhanced User Experience**:
+
+   - Infinite scrolling or advanced pagination
+   - Real-time search with debouncing
+   - Drag-and-drop interfaces
+   - Keyboard shortcuts and accessibility
+   - Advanced filtering with multiple criteria
+
+8. **Business Logic Features**:
+
+   - User permissions and role-based access
+   - Audit logs for data changes
+   - Data validation rules
+   - Business workflow management
+   - Reports and analytics dashboards
+
+9. **Performance Optimizations**:
+   - Virtual scrolling for large datasets
+   - Background data prefetching
+   - Intelligent caching with TTL
+   - Memory usage optimization
+   - Bundle splitting for feature modules
