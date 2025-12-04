@@ -10,9 +10,13 @@ import {
 } from "@/components/ui/dialog";
 import ProductForm from "@/components/ProductForm";
 import { Button } from "@/components/ui/button";
-
+import { useAddProduct } from "@/api/products";
+import { toast } from "sonner";
+import { useEditProduct } from "@/api/products/edit-product";
+import { useDeleteProduct } from "@/api/products/delete-product";
 export const ProductsLayout = () => {
   const { data } = useProducts();
+
   const [{ isOpen, initialState }, setAddEditProductDialogState] = useState<{
     isOpen: boolean;
     initialState: Product | null;
@@ -42,6 +46,36 @@ export const ProductsLayout = () => {
     });
   };
 
+  const { mutate: addProduct } = useAddProduct({
+    onSuccess: () => {
+      toast.success("Product added successfully");
+      handleCancel();
+    },
+    onError: (error) => {
+      console.error("Error adding product:", error);
+    },
+  });
+
+  const { mutate: editProduct } = useEditProduct({
+    onSuccess: () => {
+      toast.success("Product edited successfully");
+      handleCancel();
+    },
+    onError: (error) => {
+      console.error("Error editing product:", error);
+    },
+  });
+
+  const { mutate: deleteProduct } = useDeleteProduct({
+    onSuccess: () => {
+      toast.success("Product deleted successfully");
+      handleCancel();
+    },
+    onError: (error) => {
+      console.error("Error deleting product:", error);
+    },
+  });
+
   return (
     <div className="container mx-auto py-10 px-4 md:px-0">
       <div className="flex justify-between items-center mb-6">
@@ -57,7 +91,7 @@ export const ProductsLayout = () => {
             onEdit={() => {
               handleEditProduct(product);
             }}
-            onDelete={() => {}}
+            onDelete={() => deleteProduct({ id: product.id })}
           />
         ))}
       </div>
@@ -70,7 +104,11 @@ export const ProductsLayout = () => {
           <ProductForm
             product={initialState}
             onSubmit={(data) => {
-              console.log(data);
+              if (!initialState) {
+                addProduct(data);
+              } else {
+                editProduct({ id: initialState.id, product: data });
+              }
             }}
             onCancel={handleCancel}
           />

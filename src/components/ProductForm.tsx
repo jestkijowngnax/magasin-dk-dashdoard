@@ -1,22 +1,12 @@
 import type { FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import type { Product } from "@/api/products/get-products";
+import type { AddEditProductPayload } from "@/api/products/schemas/addEditProductPayload";
 
 interface ProductFormProps {
   product?: Product | null;
-  onSubmit: (formData: ProductFormData) => void;
+  onSubmit: (formData: AddEditProductPayload) => void;
   onCancel: () => void;
-}
-
-export interface ProductFormData {
-  title: string;
-  brand: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  stock: number;
-  category: string;
-  thumbnail: string;
 }
 
 export default function ProductForm({
@@ -30,7 +20,7 @@ export default function ProductForm({
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const productData: ProductFormData = {
+    const productData: AddEditProductPayload = {
       title: formData.get("title") as string,
       brand: formData.get("brand") as string,
       description: formData.get("description") as string,
